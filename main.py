@@ -39,7 +39,7 @@ class Shortener(FlowLauncher):
             except Exception:
                 output.append(
                     {
-                        "Title": "Error: Failed to shorten the URL",
+                        "Title": "Error: Enter a valid URL",
                         "IcoPath": "Images/error.png",
                     }
                 )
@@ -64,21 +64,6 @@ class Shortener(FlowLauncher):
             )
 
         return output
-
-    def context_menu(self, data):
-        return [
-            {
-                "Title": "Hello World Python's Context menu",
-                "SubTitle": "Press enter to open Flow the plugin's repo in GitHub",
-                "IcoPath": "Images/app.png",
-                "JsonRPCAction": {
-                    "method": "open_url",
-                    "parameters": [
-                        "https://github.com/Flow-Launcher/Flow.Launcher.Plugin.HelloWorldPython"
-                    ],
-                },
-            }
-        ]
 
     def copy(self, tiny):
         pyperclip.copy(tiny)
