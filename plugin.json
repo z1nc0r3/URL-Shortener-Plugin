@@ -1,0 +1,12 @@
+{
+    "ID": "425D1CE7-1327-4593-B1C0-A37614B313EF",
+    "ActionKeyword": "us",
+    "Name": "URL Shortener",
+    "Description": "Plugin to shorten URLs",
+    "Author": "z1nc0r3",
+    "Version": "1.0.0",
+    "Language": "python",
+    "Website": "https://github.com/z1nc0r3/URL-Shortener-Plugin",
+    "IcoPath": "Images\\app.png",
+    "ExecuteFileName": "main.py"
+}
