@@ -1,45 +1,76 @@
-# -*- coding: utf-8 -*-
+# Author: Lasith Manujitha
+# Github: @z1nc0r3
+# Description: A simple plugin to shorten URLs using cleanuri.com
+# Date: 2024-02-04
 
-import sys,os
+import sys, os
+
 parent_folder_path = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(parent_folder_path)
-sys.path.append(os.path.join(parent_folder_path, 'lib'))
-sys.path.append(os.path.join(parent_folder_path, 'plugin'))
+sys.path.append(os.path.join(parent_folder_path, "lib"))
+sys.path.append(os.path.join(parent_folder_path, "plugin"))
 
 from flowlauncher import FlowLauncher
 import webbrowser
+import requests
+import pyperclip
 
 
-class HelloWorld(FlowLauncher):
+class Shortener(FlowLauncher):
 
     def query(self, query):
-        return [
-            {
-                "Title": "Hello World, this is where title goes. {}".format(('Your query is: ' + query , query)[query == '']),
-                "SubTitle": "This is where your subtitle goes, press enter to open Flow's url",
-                "IcoPath": "Images/app.png",
-                "JsonRPCAction": {
-                    "method": "open_url",
-                    "parameters": ["https://github.com/Flow-Launcher/Flow.Launcher"]
-                }
-            }
-        ]
+        output = []
+        if len(query.strip()) == 0:
+            output.append(
+                {"Title": "Enter a URL to shorten", "IcoPath": "Images/app.png"}
+            )
 
-    def context_menu(self, data):
-        return [
-            {
-                "Title": "Hello World Python's Context menu",
-                "SubTitle": "Press enter to open Flow the plugin's repo in GitHub",
-                "IcoPath": "Images/app.png",
-                "JsonRPCAction": {
-                    "method": "open_url",
-                    "parameters": ["https://github.com/Flow-Launcher/Flow.Launcher.Plugin.HelloWorldPython"]
+        else:
+            api_url = "https://cleanuri.com/api/v1/shorten"
+
+            if not query.startswith("http://") or query.startswith("https://"):
+                query = f"https://{query}"
+
+            payload = {"url": {query}}
+
+            try:
+                response = requests.request("POST", api_url, data=payload)
+                tiny = response.json()["result_url"]
+            except Exception:
+                output.append(
+                    {
+                        "Title": "Error: Enter a valid URL",
+                        "IcoPath": "Images/error.png",
+                    }
+                )
+                return output
+
+            output.append(
+                {
+                    "Title": "Click to copy",
+                    "SubTitle": f"{tiny}",
+                    "IcoPath": "Images/shorten.png",
+                    "JsonRPCAction": {"method": "copy", "parameters": [f"{tiny}"]},
                 }
-            }
-        ]
+            )
+
+            output.append(
+                {
+                    "Title": "Click to open in browser",
+                    "SubTitle": f"{tiny}",
+                    "IcoPath": "Images/shorten.png",
+                    "JsonRPCAction": {"method": "open_url", "parameters": [f"{tiny}"]},
+                }
+            )
+
+        return output
+
+    def copy(self, tiny):
+        pyperclip.copy(tiny)
 
     def open_url(self, url):
         webbrowser.open(url)
 
+
 if __name__ == "__main__":
-    HelloWorld()
+    Shortener()
