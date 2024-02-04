@@ -58,6 +58,9 @@ class HelloWorld(FlowLauncher):
                 }
             }
         ]
+        
+    def copy(self, tiny):
+        pyperclip.copy(tiny)
 
     def open_url(self, url):
         webbrowser.open(url)
