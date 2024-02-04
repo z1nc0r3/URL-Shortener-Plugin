@@ -16,7 +16,7 @@ import requests
 import pyperclip
 
 
-class Shortner(FlowLauncher):
+class Shortener(FlowLauncher):
 
     def query(self, query):
         output = []
