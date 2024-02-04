@@ -40,7 +40,7 @@ class Shortener(FlowLauncher):
                 output.append(
                     {
                         "Title": "Error: Enter a valid URL",
-                        "IcoPath": "Images/error.png",
+                        "IcoPath": "Images/broken.png",
                     }
                 )
                 return output
@@ -49,7 +49,7 @@ class Shortener(FlowLauncher):
                 {
                     "Title": "Click to copy",
                     "SubTitle": f"{tiny}",
-                    "IcoPath": "Images/shorten.png",
+                    "IcoPath": "Images/copy.png",
                     "JsonRPCAction": {"method": "copy", "parameters": [f"{tiny}"]},
                 }
             )
@@ -58,7 +58,7 @@ class Shortener(FlowLauncher):
                 {
                     "Title": "Click to open in browser",
                     "SubTitle": f"{tiny}",
-                    "IcoPath": "Images/shorten.png",
+                    "IcoPath": "Images/open.png",
                     "JsonRPCAction": {"method": "open_url", "parameters": [f"{tiny}"]},
                 }
             )
