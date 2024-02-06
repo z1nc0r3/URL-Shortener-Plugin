@@ -2,6 +2,8 @@
 
 A URL shortening plugin for [Flow Launcher](https://flowlauncher.com/) to quickly shorten any URL using cleanuri.com API.
 
+![image](https://img.shields.io/github/downloads/z1nc0r3/URL-Shortener-Plugin/total) 
+
 ![Recording2024-02-04094934-ezgif com-video-to-gif-converter](https://github.com/z1nc0r3/URL-Shortener-Plugin/assets/64279853/2c54f5a2-f2c8-41aa-b75a-3963eddb05b1)
 
 ## Features
