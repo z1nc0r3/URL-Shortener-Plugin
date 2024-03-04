@@ -28,7 +28,7 @@ class Shortener(FlowLauncher):
         else:
             api_url = "https://cleanuri.com/api/v1/shorten"
 
-            if not query.startswith("http://") or query.startswith("https://"):
+            if not (query.startswith("http://") or query.startswith("https://")):
                 query = f"https://{query}"
 
             payload = {"url": {query}}
