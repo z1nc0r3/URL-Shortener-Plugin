@@ -26,20 +26,19 @@ class Shortener(FlowLauncher):
             )
 
         else:
-            api_url = "https://cleanuri.com/api/v1/shorten"
 
             if not (query.startswith("http://") or query.startswith("https://")):
                 query = f"https://{query}"
 
-            payload = {"url": {query}}
+            api_url = f"https://tinyurl.com/api-create.php?url={query}"
 
             try:
-                response = requests.request("POST", api_url, data=payload)
-                tiny = response.json()["result_url"]
+                response = requests.request("GET", api_url)
+                tiny = response.text
             except Exception:
                 output.append(
                     {
-                        "Title": "Error: Enter a valid URL",
+                        "Title": f"Error: Enter a valid URL",
                         "IcoPath": "Images/broken.png",
                     }
                 )
