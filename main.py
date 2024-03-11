@@ -52,10 +52,10 @@ class Shortener(FlowLauncher):
             try:
                 if not self.isValidURL(query):
                     raise ValueError
-                
+
                 response = requests.get(api_url)
                 tiny = response.text
-                
+
                 if tiny == "Error":
                     raise Exception
             except Exception:
