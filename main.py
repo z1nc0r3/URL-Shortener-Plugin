@@ -1,6 +1,6 @@
 # Author: Lasith Manujitha
 # Github: @z1nc0r3
-# Description: A simple plugin to shorten URLs using cleanuri.com
+# Description: A simple plugin to shorten URLs using tinyurl.com
 # Date: 2024-02-04
 
 import sys, os
@@ -14,9 +14,26 @@ from flowlauncher import FlowLauncher
 import webbrowser
 import requests
 import pyperclip
+import re
 
 
 class Shortener(FlowLauncher):
+
+    def isValidURL(self, str):
+        regex = (
+            "((http|https)://)(www.)?"
+            + "[a-zA-Z0-9@:%._\\+~#?&//=]"
+            + "{1,256}\\.[a-z]"
+            + "{2,6}\\b([-a-zA-Z0-9@:%"
+            + "._\\+~#?&//=]*)"
+        )
+
+        p = re.compile(regex)
+
+        if re.search(p, str):
+            return True
+        else:
+            return False
 
     def query(self, query):
         output = []
@@ -33,12 +50,18 @@ class Shortener(FlowLauncher):
             api_url = f"https://tinyurl.com/api-create.php?url={query}"
 
             try:
-                response = requests.request("GET", api_url)
+                if not self.isValidURL(query):
+                    raise ValueError
+                
+                response = requests.get(api_url)
                 tiny = response.text
+                
+                if tiny == "Error":
+                    raise Exception
             except Exception:
                 output.append(
                     {
-                        "Title": f"Error: Enter a valid URL",
+                        "Title": "Error: Enter a valid URL",
                         "IcoPath": "Images/broken.png",
                     }
                 )
