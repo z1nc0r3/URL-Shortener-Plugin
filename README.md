@@ -1,6 +1,6 @@
 # URL Shortener plugin - Flow Launcher
 
-A URL shortening plugin for [Flow Launcher](https://flowlauncher.com/) to quickly shorten any URL using cleanuri.com API.
+A URL shortening plugin for [Flow Launcher](https://flowlauncher.com/) to quickly shorten any URL using tinyurl.com API.
 
 ![image](https://img.shields.io/github/downloads/z1nc0r3/URL-Shortener-Plugin/total) 
 
@@ -11,7 +11,7 @@ A URL shortening plugin for [Flow Launcher](https://flowlauncher.com/) to quickl
 - Simple and Fast response
 - Option to copy the URL to the clipboard
 - Option to open the URL in the browser
-- Open source
+- Completely open-source
 
 ## Usage
 
